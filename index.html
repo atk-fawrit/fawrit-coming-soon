@@ -245,11 +245,9 @@
     <script>
         // Countdown timer functionality
         document.addEventListener('DOMContentLoaded', function() {
-            // Set the launch date - 45 days from now
+            // Set the launch date on June 8, 2025
             const now = new Date();
-            const launchDate = new Date();
-            launchDate.setDate(now.getDate() + 45);
-            launchDate.setHours(0, 0, 0, 0);
+            const launchDate = new Date('June 8, 2025 00:00:00');
             
             const daysEl = document.getElementById('days');
             const hoursEl = document.getElementById('hours');
