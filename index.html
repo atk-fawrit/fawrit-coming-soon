@@ -143,6 +143,82 @@
             z-index: 10;
         }
 
+        /* Contact button (hamburger icon) */
+        .contact-button {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            z-index: 10;
+            width: 28px;
+            height: 20px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 4px;
+        }
+
+        .contact-button span {
+            display: block;
+            height: 3px;
+            background: #fff;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Contact modal overlay */
+        .contact-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+        }
+
+        .contact-modal {
+            position: relative;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            color: #fff;
+            min-width: 260px;
+            max-width: 320px;
+            width: 90%;
+            text-align: left;
+        }
+
+        .contact-modal h2 {
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .contact-close {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        .contact-line {
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
         @keyframes fadeIn {
             to {
                 opacity: 1;
@@ -215,6 +291,23 @@
     
     <!-- Keep existing gradient effect but with reduced opacity -->
     <div class="gradient-bg"></div>
+
+    <!-- Contact button and modal -->
+    <div id="contact-button" class="contact-button">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div id="contact-modal-overlay" class="contact-modal-overlay">
+        <div class="contact-modal">
+            <div class="contact-close" id="contact-close">&times;</div>
+            <h2>Contact Us</h2>
+            <p class="contact-line">Email: <a href="mailto:contact@fawrit.com">contact@fawrit.com</a></p>
+            <p class="contact-line">Address:</p>
+            <p class="contact-line">Head Office: 4249 Dhahran 34247-6610 1, Saudi Arabia</p>
+            <p class="contact-line">India Office: Corrazone, Panadans, CUSAT, Kochi, Kerala 682022</p>
+        </div>
+    </div>
     
     <!-- Countdown positioned in top left quadrant with stylish heading -->
     <div class="countdown-container">
@@ -253,6 +346,24 @@
             const hoursEl = document.getElementById('hours');
             const minutesEl = document.getElementById('minutes');
             const secondsEl = document.getElementById('seconds');
+
+            const contactButton = document.getElementById('contact-button');
+            const contactOverlay = document.getElementById('contact-modal-overlay');
+            const contactClose = document.getElementById('contact-close');
+
+            contactButton.addEventListener('click', () => {
+                contactOverlay.classList.toggle('show');
+            });
+
+            contactOverlay.addEventListener('click', (e) => {
+                if (e.target === contactOverlay) {
+                    contactOverlay.classList.remove('show');
+                }
+            });
+
+            contactClose.addEventListener('click', () => {
+                contactOverlay.classList.remove('show');
+            });
             
             function updateCountdown() {
                 const currentTime = new Date();
